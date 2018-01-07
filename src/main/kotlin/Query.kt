@@ -1,7 +1,10 @@
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
+import graphql.schema.DataFetchingEnvironment
 
 class Query : GraphQLQueryResolver {
-    fun user() : User {
-        return User("Hieu", "Tran Duc")
+    fun user(env: DataFetchingEnvironment) : User {
+        val context = env.getContext<Context>()
+
+        return context.currentUser
     }
 }
