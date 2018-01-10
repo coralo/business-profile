@@ -1,5 +1,6 @@
 package models
 
+import org.mindrot.jbcrypt.BCrypt
 import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Reference
 
@@ -8,9 +9,8 @@ class User: BaseEntity() {
     var firstName: String? = null
     var lastName: String? = null
     var password: String? = null
-        get() = null
         set(value) {
-            field = value + "hashed"
+            field = BCrypt.hashpw(value, BCrypt.gensalt())
         }
 
     @Reference
