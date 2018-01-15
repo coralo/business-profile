@@ -4,6 +4,10 @@ import com.mongodb.MongoClient
 import com.mongodb.client.MongoDatabase
 import graphql.servlet.GraphQLContext
 import graphql.servlet.SimpleGraphQLServlet
+import org.mongodb.morphia.Datastore
+import org.mongodb.morphia.Morphia
+import repositories.Repositories
+import services.Services
 import java.util.Optional
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServletRequest
@@ -20,8 +24,11 @@ class GraphQLController: SimpleGraphQLServlet(SchemaParser.newParser()
         .makeExecutableSchema()) {
     override fun createContext(request: Optional<HttpServletRequest>?, response: Optional<HttpServletResponse>?)
         : GraphQLContext {
-//        val mongo: MongoDatabase = MongoClient().getDatabase("business_profile")
-        val user = User("Hieu", "Tran Duc")
-        return Context(user, request, response)
+        val morphia = Morphia()
+        val mongoClient = MongoClient()
+        val dataStore: Datastore = morphia.createDatastore(mongoClient, "business_profile")
+        val repositories = Repositories(dataStore)
+        val services = Services(repositories)
+        return Context(null, repositories, services, request, response)
     }
 }

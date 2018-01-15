@@ -6,13 +6,12 @@ import exceptions.InvalidLoginException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.mindrot.jbcrypt.BCrypt
-import repositories.ContactRepository
-import repositories.UserRepository
+import repositories.Repositories
 import java.util.*
 
-class UserService(val userRepository: UserRepository, val contactRepository: ContactRepository) {
+class UserService(private val repositories: Repositories) {
     fun login(login: LoginInput): AuthResponse {
-        val contact = contactRepository.findOne("contact", login.account)
+        val contact = repositories.contactRepository.findOne("contact", login.account)
         if (contact.user == null) {
             throw InvalidLoginException("contact", "unknown user")
         }

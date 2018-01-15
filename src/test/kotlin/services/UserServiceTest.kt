@@ -6,14 +6,11 @@ import org.junit.Assert
 import helpers.BasePersistenceTest
 import helpers.factories.UserFactory
 import org.junit.Test
-
-import repositories.ContactRepository
-import repositories.UserRepository
+import repositories.Repositories
 
 class UserServiceTest : BasePersistenceTest() {
-    private val userRepository = UserRepository(dataStore)
-    private val contactRepository = ContactRepository(dataStore)
-    private val userService = UserService(userRepository, contactRepository)
+    private val repositories = Repositories(dataStore)
+    private val userService = UserService(repositories)
 
     @Test
     fun testLoginWithCorrectPassword() {
