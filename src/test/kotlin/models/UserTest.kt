@@ -1,5 +1,7 @@
+package models
+
 import com.github.javafaker.Faker
-import models.User
+import helpers.BasePersistenceTest
 import org.junit.Assert
 import org.junit.Test
 import org.mindrot.jbcrypt.BCrypt

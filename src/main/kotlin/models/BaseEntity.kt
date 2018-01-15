@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Version
 abstract class BaseEntity {
     @Id
     @Property("id")
-    var id: ObjectId? = null
+    var id: ObjectId = ObjectId.get()
 
     @Version
     @Property("version")

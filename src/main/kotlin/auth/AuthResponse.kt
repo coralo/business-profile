@@ -1,3 +1,5 @@
 package auth
 
-class AuthResponse(val token: String)
+import models.User
+
+class AuthResponse(val token: String, val user: User?)
