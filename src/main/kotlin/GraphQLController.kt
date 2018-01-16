@@ -1,8 +1,9 @@
 import auth.AuthMutations
 import com.coxautodev.graphql.tools.SchemaParser
 import com.mongodb.MongoClient
-import com.mongodb.client.MongoDatabase
+import common.Context
 import graphql.servlet.GraphQLContext
+import graphql.servlet.GraphQLErrorHandler
 import graphql.servlet.SimpleGraphQLServlet
 import org.mongodb.morphia.Datastore
 import org.mongodb.morphia.Morphia
