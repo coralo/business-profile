@@ -2,6 +2,7 @@ import auth.AuthMutations
 import com.coxautodev.graphql.tools.SchemaParser
 import com.mongodb.MongoClient
 import common.Context
+import common.CustomGraphQLErrorHandler
 import graphql.servlet.GraphQLContext
 import graphql.servlet.GraphQLErrorHandler
 import graphql.servlet.SimpleGraphQLServlet
@@ -31,5 +32,9 @@ class GraphQLController: SimpleGraphQLServlet(SchemaParser.newParser()
         val repositories = Repositories(dataStore)
         val services = Services(repositories)
         return Context(null, repositories, services, request, response)
+    }
+
+    override fun getGraphQLErrorHandler(): GraphQLErrorHandler {
+        return CustomGraphQLErrorHandler()
     }
 }
